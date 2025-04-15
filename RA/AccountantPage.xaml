@@ -1,0 +1,16 @@
+﻿<Page x:Class="ЖКХ.AccountantPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="AccountantPage"
+      Background="{StaticResource LightGrayBrush}">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Панель бухгалтера" 
+                       Style="{StaticResource MainHeader}"/>
+            <TextBlock Text="Здесь будут финансовые функции" 
+                       Style="{StaticResource SubHeader}" Margin="0 20"/>
+            <Button Content="Выйти" Click="LogoutButton_Click" 
+                    Style="{StaticResource PrimaryButton}" Width="150"/>
+        </StackPanel>
+    </Grid>
+</Page>

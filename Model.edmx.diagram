@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bc2fa91a0b2c46fdb5793bc2681d7108" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Apartment" Width="1.5" PointX="5.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Building" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Contract" Width="1.5" PointX="8.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ManagementCompany" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MeterReading" Width="1.5" PointX="9.75" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Meter" Width="1.5" PointX="7.5" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Payment" Width="1.5" PointX="8.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Request" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Resident" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Role" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Service" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagram" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="3" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Вызовы" Width="1.5" PointX="14.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Жалобы" Width="1.5" PointX="14" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Жильцы" Width="1.5" PointX="14" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Заявки" Width="1.5" PointX="17" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Квартиры" Width="1.5" PointX="11.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Платежи" Width="1.5" PointX="16.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Работники" Width="1.5" PointX="12.5" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Расходы" Width="1.5" PointX="18.5" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Счета" Width="1.5" PointX="14" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Услуги" Width="1.5" PointX="16.25" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK__Apartment__Build__7D439ABD" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Apartment__Resid__7E37BEF6" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Meters__Apartmen__06CD04F7" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Buildings__Manag__778AC167" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Contracts__Manag__0D7A0286" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Contracts__Resid__0C85DE4D" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__MeterRead__Meter__09A971A2" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Payments__Reside__02FC7413" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Payments__Servic__03F0984C" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Requests__Reside__10566F31" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Requests__Servic__114A936A" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Residents__RoleI__7A672E12" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Users__RoleID__72C60C4A" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Вызовы__работник__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Жалобы__номер_кв__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Жильцы__номер_кв__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Заявки__номер_кв__440B1D61" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Счета__номер_ква__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Платежи__номер_с__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__Расходы__тип_усл__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.Вызовы_Заявки" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.Услуги_Жалобы" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

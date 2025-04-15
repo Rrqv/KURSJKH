@@ -1,0 +1,16 @@
+﻿<Page x:Class="ЖКХ.ResidentPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="ResidentPage"
+      Background="{StaticResource LightGrayBrush}">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Личный кабинет жильца" 
+                       Style="{StaticResource MainHeader}"/>
+            <TextBlock Text="Здесь будут функции для жильцов" 
+                       Style="{StaticResource SubHeader}" Margin="0 20"/>
+            <Button Content="Выйти" Click="LogoutButton_Click" 
+                    Style="{StaticResource PrimaryButtonStyle}" Width="150"/>
+        </StackPanel>
+    </Grid>
+</Page>

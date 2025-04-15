@@ -1,0 +1,860 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Apartments">
+          <Key>
+            <PropertyRef Name="ApartmentID" />
+          </Key>
+          <Property Name="ApartmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BuildingID" Type="int" Nullable="false" />
+          <Property Name="ApartmentNumber" Type="int" Nullable="false" />
+          <Property Name="Area" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ResidentID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Buildings">
+          <Key>
+            <PropertyRef Name="BuildingID" />
+          </Key>
+          <Property Name="BuildingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Floors" Type="int" Nullable="false" />
+          <Property Name="ManagementCompanyID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contracts">
+          <Key>
+            <PropertyRef Name="ContractID" />
+          </Key>
+          <Property Name="ContractID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResidentID" Type="int" Nullable="false" />
+          <Property Name="ManagementCompanyID" Type="int" Nullable="false" />
+          <Property Name="ContractDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ManagementCompanies">
+          <Key>
+            <PropertyRef Name="ManagementCompanyID" />
+          </Key>
+          <Property Name="ManagementCompanyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MeterReadings">
+          <Key>
+            <PropertyRef Name="ReadingID" />
+          </Key>
+          <Property Name="ReadingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MeterID" Type="int" Nullable="false" />
+          <Property Name="ReadingValue" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ReadingDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Meters">
+          <Key>
+            <PropertyRef Name="MeterID" />
+          </Key>
+          <Property Name="MeterID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApartmentID" Type="int" Nullable="false" />
+          <Property Name="MeterType" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="InstallationDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResidentID" Type="int" Nullable="false" />
+          <Property Name="ServiceID" Type="int" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="PaymentDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Requests">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResidentID" Type="int" Nullable="false" />
+          <Property Name="ServiceID" Type="int" Nullable="false" />
+          <Property Name="RequestDate" Type="date" Nullable="false" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Residents">
+          <Key>
+            <PropertyRef Name="ResidentID" />
+          </Key>
+          <Property Name="ResidentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="ServiceID" />
+          </Key>
+          <Property Name="ServiceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="RoleID" Type="int" />
+        </EntityType>
+        <Association Name="FK__Apartment__Build__44FF419A">
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="1" />
+          <End Role="Apartments" Type="Self.Apartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="BuildingID" />
+            </Principal>
+            <Dependent Role="Apartments">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Apartment__Resid__45F365D3">
+          <End Role="Residents" Type="Self.Residents" Multiplicity="1" />
+          <End Role="Apartments" Type="Self.Apartments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residents">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="Apartments">
+              <PropertyRef Name="ResidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Buildings__Manag__3F466844">
+          <End Role="ManagementCompanies" Type="Self.ManagementCompanies" Multiplicity="1" />
+          <End Role="Buildings" Type="Self.Buildings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ManagementCompanies">
+              <PropertyRef Name="ManagementCompanyID" />
+            </Principal>
+            <Dependent Role="Buildings">
+              <PropertyRef Name="ManagementCompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contracts__Manag__5535A963">
+          <End Role="ManagementCompanies" Type="Self.ManagementCompanies" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ManagementCompanies">
+              <PropertyRef Name="ManagementCompanyID" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="ManagementCompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contracts__Resid__5441852A">
+          <End Role="Residents" Type="Self.Residents" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contracts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residents">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="ResidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeterRead__Meter__5165187F">
+          <End Role="Meters" Type="Self.Meters" Multiplicity="1" />
+          <End Role="MeterReadings" Type="Self.MeterReadings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meters">
+              <PropertyRef Name="MeterID" />
+            </Principal>
+            <Dependent Role="MeterReadings">
+              <PropertyRef Name="MeterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meters__Apartmen__4E88ABD4">
+          <End Role="Apartments" Type="Self.Apartments" Multiplicity="1" />
+          <End Role="Meters" Type="Self.Meters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apartments">
+              <PropertyRef Name="ApartmentID" />
+            </Principal>
+            <Dependent Role="Meters">
+              <PropertyRef Name="ApartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__Reside__4AB81AF0">
+          <End Role="Residents" Type="Self.Residents" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residents">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="ResidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__Servic__4BAC3F29">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Requests__Reside__5812160E">
+          <End Role="Residents" Type="Self.Residents" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residents">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="ResidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Requests__Servic__59063A47">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Residents__RoleI__4222D4EF">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Residents" Type="Self.Residents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Residents">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleID__3A81B327">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="Apartments" EntityType="Self.Apartments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Buildings" EntityType="Self.Buildings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contracts" EntityType="Self.Contracts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ManagementCompanies" EntityType="Self.ManagementCompanies" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MeterReadings" EntityType="Self.MeterReadings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meters" EntityType="Self.Meters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Requests" EntityType="Self.Requests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Residents" EntityType="Self.Residents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Apartment__Build__44FF419A" Association="Self.FK__Apartment__Build__44FF419A">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="Apartments" EntitySet="Apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Apartment__Resid__45F365D3" Association="Self.FK__Apartment__Resid__45F365D3">
+            <End Role="Residents" EntitySet="Residents" />
+            <End Role="Apartments" EntitySet="Apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Buildings__Manag__3F466844" Association="Self.FK__Buildings__Manag__3F466844">
+            <End Role="ManagementCompanies" EntitySet="ManagementCompanies" />
+            <End Role="Buildings" EntitySet="Buildings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contracts__Manag__5535A963" Association="Self.FK__Contracts__Manag__5535A963">
+            <End Role="ManagementCompanies" EntitySet="ManagementCompanies" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contracts__Resid__5441852A" Association="Self.FK__Contracts__Resid__5441852A">
+            <End Role="Residents" EntitySet="Residents" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeterRead__Meter__5165187F" Association="Self.FK__MeterRead__Meter__5165187F">
+            <End Role="Meters" EntitySet="Meters" />
+            <End Role="MeterReadings" EntitySet="MeterReadings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meters__Apartmen__4E88ABD4" Association="Self.FK__Meters__Apartmen__4E88ABD4">
+            <End Role="Apartments" EntitySet="Apartments" />
+            <End Role="Meters" EntitySet="Meters" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__Reside__4AB81AF0" Association="Self.FK__Payments__Reside__4AB81AF0">
+            <End Role="Residents" EntitySet="Residents" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__Servic__4BAC3F29" Association="Self.FK__Payments__Servic__4BAC3F29">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Requests__Reside__5812160E" Association="Self.FK__Requests__Reside__5812160E">
+            <End Role="Residents" EntitySet="Residents" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Requests__Servic__59063A47" Association="Self.FK__Requests__Servic__59063A47">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Residents__RoleI__4222D4EF" Association="Self.FK__Residents__RoleI__4222D4EF">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Residents" EntitySet="Residents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleID__3A81B327" Association="Self.FK__Users__RoleID__3A81B327">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Apartment">
+          <Key>
+            <PropertyRef Name="ApartmentID" />
+          </Key>
+          <Property Name="ApartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BuildingID" Type="Int32" Nullable="false" />
+          <Property Name="ApartmentNumber" Type="Int32" Nullable="false" />
+          <Property Name="Area" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ResidentID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Building" Relationship="Self.FK__Apartment__Build__44FF419A" FromRole="Apartments" ToRole="Buildings" />
+          <NavigationProperty Name="Resident" Relationship="Self.FK__Apartment__Resid__45F365D3" FromRole="Apartments" ToRole="Residents" />
+          <NavigationProperty Name="Meters" Relationship="Self.FK__Meters__Apartmen__4E88ABD4" FromRole="Apartments" ToRole="Meters" />
+        </EntityType>
+        <EntityType Name="Building">
+          <Key>
+            <PropertyRef Name="BuildingID" />
+          </Key>
+          <Property Name="BuildingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Floors" Type="Int32" Nullable="false" />
+          <Property Name="ManagementCompanyID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Apartments" Relationship="Self.FK__Apartment__Build__44FF419A" FromRole="Buildings" ToRole="Apartments" />
+          <NavigationProperty Name="ManagementCompany" Relationship="Self.FK__Buildings__Manag__3F466844" FromRole="Buildings" ToRole="ManagementCompanies" />
+        </EntityType>
+        <EntityType Name="Contract">
+          <Key>
+            <PropertyRef Name="ContractID" />
+          </Key>
+          <Property Name="ContractID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResidentID" Type="Int32" Nullable="false" />
+          <Property Name="ManagementCompanyID" Type="Int32" Nullable="false" />
+          <Property Name="ContractDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="ManagementCompany" Relationship="Self.FK__Contracts__Manag__5535A963" FromRole="Contracts" ToRole="ManagementCompanies" />
+          <NavigationProperty Name="Resident" Relationship="Self.FK__Contracts__Resid__5441852A" FromRole="Contracts" ToRole="Residents" />
+        </EntityType>
+        <EntityType Name="ManagementCompany">
+          <Key>
+            <PropertyRef Name="ManagementCompanyID" />
+          </Key>
+          <Property Name="ManagementCompanyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Buildings" Relationship="Self.FK__Buildings__Manag__3F466844" FromRole="ManagementCompanies" ToRole="Buildings" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK__Contracts__Manag__5535A963" FromRole="ManagementCompanies" ToRole="Contracts" />
+        </EntityType>
+        <EntityType Name="MeterReading">
+          <Key>
+            <PropertyRef Name="ReadingID" />
+          </Key>
+          <Property Name="ReadingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MeterID" Type="Int32" Nullable="false" />
+          <Property Name="ReadingValue" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="ReadingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Meter" Relationship="Self.FK__MeterRead__Meter__5165187F" FromRole="MeterReadings" ToRole="Meters" />
+        </EntityType>
+        <EntityType Name="Meter">
+          <Key>
+            <PropertyRef Name="MeterID" />
+          </Key>
+          <Property Name="MeterID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApartmentID" Type="Int32" Nullable="false" />
+          <Property Name="MeterType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="InstallationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Apartment" Relationship="Self.FK__Meters__Apartmen__4E88ABD4" FromRole="Meters" ToRole="Apartments" />
+          <NavigationProperty Name="MeterReadings" Relationship="Self.FK__MeterRead__Meter__5165187F" FromRole="Meters" ToRole="MeterReadings" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResidentID" Type="Int32" Nullable="false" />
+          <Property Name="ServiceID" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Resident" Relationship="Self.FK__Payments__Reside__4AB81AF0" FromRole="Payments" ToRole="Residents" />
+          <NavigationProperty Name="Service" Relationship="Self.FK__Payments__Servic__4BAC3F29" FromRole="Payments" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="RequestID" />
+          </Key>
+          <Property Name="RequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResidentID" Type="Int32" Nullable="false" />
+          <Property Name="ServiceID" Type="Int32" Nullable="false" />
+          <Property Name="RequestDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Resident" Relationship="Self.FK__Requests__Reside__5812160E" FromRole="Requests" ToRole="Residents" />
+          <NavigationProperty Name="Service" Relationship="Self.FK__Requests__Servic__59063A47" FromRole="Requests" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Resident">
+          <Key>
+            <PropertyRef Name="ResidentID" />
+          </Key>
+          <Property Name="ResidentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Apartments" Relationship="Self.FK__Apartment__Resid__45F365D3" FromRole="Residents" ToRole="Apartments" />
+          <NavigationProperty Name="Contracts" Relationship="Self.FK__Contracts__Resid__5441852A" FromRole="Residents" ToRole="Contracts" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payments__Reside__4AB81AF0" FromRole="Residents" ToRole="Payments" />
+          <NavigationProperty Name="Requests" Relationship="Self.FK__Requests__Reside__5812160E" FromRole="Residents" ToRole="Requests" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Residents__RoleI__4222D4EF" FromRole="Residents" ToRole="Roles" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Role1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Residents" Relationship="Self.FK__Residents__RoleI__4222D4EF" FromRole="Roles" ToRole="Residents" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleID__3A81B327" FromRole="Roles" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="ServiceID" />
+          </Key>
+          <Property Name="ServiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payments__Servic__4BAC3F29" FromRole="Service" ToRole="Payments" />
+          <NavigationProperty Name="Requests" Relationship="Self.FK__Requests__Servic__59063A47" FromRole="Service" ToRole="Requests" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Users__RoleID__3A81B327" FromRole="Users" ToRole="Roles" />
+        </EntityType>
+        <Association Name="FK__Apartment__Build__44FF419A">
+          <End Role="Buildings" Type="Self.Building" Multiplicity="1" />
+          <End Role="Apartments" Type="Self.Apartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Buildings">
+              <PropertyRef Name="BuildingID" />
+            </Principal>
+            <Dependent Role="Apartments">
+              <PropertyRef Name="BuildingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Apartment__Resid__45F365D3">
+          <End Role="Residents" Type="Self.Resident" Multiplicity="1" />
+          <End Role="Apartments" Type="Self.Apartment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residents">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="Apartments">
+              <PropertyRef Name="ResidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Meters__Apartmen__4E88ABD4">
+          <End Role="Apartments" Type="Self.Apartment" Multiplicity="1" />
+          <End Role="Meters" Type="Self.Meter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Apartments">
+              <PropertyRef Name="ApartmentID" />
+            </Principal>
+            <Dependent Role="Meters">
+              <PropertyRef Name="ApartmentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Buildings__Manag__3F466844">
+          <End Role="ManagementCompanies" Type="Self.ManagementCompany" Multiplicity="1" />
+          <End Role="Buildings" Type="Self.Building" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ManagementCompanies">
+              <PropertyRef Name="ManagementCompanyID" />
+            </Principal>
+            <Dependent Role="Buildings">
+              <PropertyRef Name="ManagementCompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contracts__Manag__5535A963">
+          <End Role="ManagementCompanies" Type="Self.ManagementCompany" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ManagementCompanies">
+              <PropertyRef Name="ManagementCompanyID" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="ManagementCompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Contracts__Resid__5441852A">
+          <End Role="Residents" Type="Self.Resident" Multiplicity="1" />
+          <End Role="Contracts" Type="Self.Contract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residents">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="Contracts">
+              <PropertyRef Name="ResidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MeterRead__Meter__5165187F">
+          <End Role="Meters" Type="Self.Meter" Multiplicity="1" />
+          <End Role="MeterReadings" Type="Self.MeterReading" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meters">
+              <PropertyRef Name="MeterID" />
+            </Principal>
+            <Dependent Role="MeterReadings">
+              <PropertyRef Name="MeterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__Reside__4AB81AF0">
+          <End Role="Residents" Type="Self.Resident" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residents">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="ResidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__Servic__4BAC3F29">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Requests__Reside__5812160E">
+          <End Role="Residents" Type="Self.Resident" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Residents">
+              <PropertyRef Name="ResidentID" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="ResidentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Requests__Servic__59063A47">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Requests" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ServiceID" />
+            </Principal>
+            <Dependent Role="Requests">
+              <PropertyRef Name="ServiceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Residents__RoleI__4222D4EF">
+          <End Role="Roles" Type="Self.Role" Multiplicity="1" />
+          <End Role="Residents" Type="Self.Resident" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Residents">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleID__3A81B327">
+          <End Role="Roles" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Apartments" EntityType="Self.Apartment" />
+          <EntitySet Name="Buildings" EntityType="Self.Building" />
+          <EntitySet Name="Contracts" EntityType="Self.Contract" />
+          <EntitySet Name="ManagementCompanies" EntityType="Self.ManagementCompany" />
+          <EntitySet Name="MeterReadings" EntityType="Self.MeterReading" />
+          <EntitySet Name="Meters" EntityType="Self.Meter" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="Requests" EntityType="Self.Request" />
+          <EntitySet Name="Residents" EntityType="Self.Resident" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Services" EntityType="Self.Service" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Apartment__Build__44FF419A" Association="Self.FK__Apartment__Build__44FF419A">
+            <End Role="Buildings" EntitySet="Buildings" />
+            <End Role="Apartments" EntitySet="Apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Apartment__Resid__45F365D3" Association="Self.FK__Apartment__Resid__45F365D3">
+            <End Role="Residents" EntitySet="Residents" />
+            <End Role="Apartments" EntitySet="Apartments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Meters__Apartmen__4E88ABD4" Association="Self.FK__Meters__Apartmen__4E88ABD4">
+            <End Role="Apartments" EntitySet="Apartments" />
+            <End Role="Meters" EntitySet="Meters" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Buildings__Manag__3F466844" Association="Self.FK__Buildings__Manag__3F466844">
+            <End Role="ManagementCompanies" EntitySet="ManagementCompanies" />
+            <End Role="Buildings" EntitySet="Buildings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contracts__Manag__5535A963" Association="Self.FK__Contracts__Manag__5535A963">
+            <End Role="ManagementCompanies" EntitySet="ManagementCompanies" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Contracts__Resid__5441852A" Association="Self.FK__Contracts__Resid__5441852A">
+            <End Role="Residents" EntitySet="Residents" />
+            <End Role="Contracts" EntitySet="Contracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MeterRead__Meter__5165187F" Association="Self.FK__MeterRead__Meter__5165187F">
+            <End Role="Meters" EntitySet="Meters" />
+            <End Role="MeterReadings" EntitySet="MeterReadings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__Reside__4AB81AF0" Association="Self.FK__Payments__Reside__4AB81AF0">
+            <End Role="Residents" EntitySet="Residents" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__Servic__4BAC3F29" Association="Self.FK__Payments__Servic__4BAC3F29">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Requests__Reside__5812160E" Association="Self.FK__Requests__Reside__5812160E">
+            <End Role="Residents" EntitySet="Residents" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Requests__Servic__59063A47" Association="Self.FK__Requests__Servic__59063A47">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="Requests" EntitySet="Requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Residents__RoleI__4222D4EF" Association="Self.FK__Residents__RoleI__4222D4EF">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Residents" EntitySet="Residents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleID__3A81B327" Association="Self.FK__Users__RoleID__3A81B327">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Apartments">
+            <EntityTypeMapping TypeName="Model.Apartment">
+              <MappingFragment StoreEntitySet="Apartments">
+                <ScalarProperty Name="ApartmentID" ColumnName="ApartmentID" />
+                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+                <ScalarProperty Name="ApartmentNumber" ColumnName="ApartmentNumber" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="ResidentID" ColumnName="ResidentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Buildings">
+            <EntityTypeMapping TypeName="Model.Building">
+              <MappingFragment StoreEntitySet="Buildings">
+                <ScalarProperty Name="BuildingID" ColumnName="BuildingID" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Floors" ColumnName="Floors" />
+                <ScalarProperty Name="ManagementCompanyID" ColumnName="ManagementCompanyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contracts">
+            <EntityTypeMapping TypeName="Model.Contract">
+              <MappingFragment StoreEntitySet="Contracts">
+                <ScalarProperty Name="ContractID" ColumnName="ContractID" />
+                <ScalarProperty Name="ResidentID" ColumnName="ResidentID" />
+                <ScalarProperty Name="ManagementCompanyID" ColumnName="ManagementCompanyID" />
+                <ScalarProperty Name="ContractDate" ColumnName="ContractDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ManagementCompanies">
+            <EntityTypeMapping TypeName="Model.ManagementCompany">
+              <MappingFragment StoreEntitySet="ManagementCompanies">
+                <ScalarProperty Name="ManagementCompanyID" ColumnName="ManagementCompanyID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MeterReadings">
+            <EntityTypeMapping TypeName="Model.MeterReading">
+              <MappingFragment StoreEntitySet="MeterReadings">
+                <ScalarProperty Name="ReadingID" ColumnName="ReadingID" />
+                <ScalarProperty Name="MeterID" ColumnName="MeterID" />
+                <ScalarProperty Name="ReadingValue" ColumnName="ReadingValue" />
+                <ScalarProperty Name="ReadingDate" ColumnName="ReadingDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meters">
+            <EntityTypeMapping TypeName="Model.Meter">
+              <MappingFragment StoreEntitySet="Meters">
+                <ScalarProperty Name="MeterID" ColumnName="MeterID" />
+                <ScalarProperty Name="ApartmentID" ColumnName="ApartmentID" />
+                <ScalarProperty Name="MeterType" ColumnName="MeterType" />
+                <ScalarProperty Name="InstallationDate" ColumnName="InstallationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="Model.Payment">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="ResidentID" ColumnName="ResidentID" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Requests">
+            <EntityTypeMapping TypeName="Model.Request">
+              <MappingFragment StoreEntitySet="Requests">
+                <ScalarProperty Name="RequestID" ColumnName="RequestID" />
+                <ScalarProperty Name="ResidentID" ColumnName="ResidentID" />
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="RequestDate" ColumnName="RequestDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Residents">
+            <EntityTypeMapping TypeName="Model.Resident">
+              <MappingFragment StoreEntitySet="Residents">
+                <ScalarProperty Name="ResidentID" ColumnName="ResidentID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Model.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Role1" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="Model.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="ServiceID" ColumnName="ServiceID" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Model.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
